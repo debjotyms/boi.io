@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Login
+{% endblock %}
+
+{% block content %}
+<!-- Start Hero Section -->
+<div class="hero d-flex align-items-center" style="padding-top: 20px; padding-bottom: 20px;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-5 text-center">
+                <div class="intro-excerpt">
+                    <h1>Login</h1>
+                    <p class="mb-4">Welcome back! Please login to access your account and continue exploring our book store. Enjoy personalized recommendations, exclusive deals, and a hassle-free shopping experience. Let's make reading simple and fun – login now!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Hero Section -->
+
+
+
+<!-- Start Login Form -->
+<div class="untree_co-section">
+    <div class="container">
+        <div class="block">
+            <div class="row justify-content-center">
+                <div class="col-md-8 col-lg-8 pb-4">
+                    <form method="POST" action="">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label class="text-black" for="username">Username</label>
+                            <input type="text" class="form-control" id="username" placeholder="Enter your username" name = 'username'>
+                        </div>
+                        <div class="form-group">
+                            <label class="text-black" for="password">Password</label>
+                            <input type="password" class="form-control" id="password" placeholder="Enter your password" name = 'password'>
+                        </div>
+                        <div class="form-group py-2">
+                            <a href="{% url 'reset'%}" class="forgot-password">Forgot Password?</a>
+                        </div>
+
+                        <a href="{% url 'home' %}">
+                            <button type="submit" class="btn btn-primary-hover-outline">Login</button>
+                        </a>
+                        
+                        <a href="{% url 'signup' %}">
+                            <button type="button" class="btn btn-primary-hover-outline">Sign Up</button>
+                        </a>
+
+                    </form>
+                    <div class="py-3">
+                        <!-- Start Flash Messages Section -->
+                            {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-{{ message.tags }}">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                            {% endif %}
+                        <!-- End Flash Messages Section -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Login Form -->
+
+
+
+{% endblock %}

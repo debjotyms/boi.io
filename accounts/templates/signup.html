@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block title %}
+    Signup
+{% endblock %}
+
+{% block content %}
+<!-- Start Hero Section -->
+<div class="hero d-flex align-items-center" style="padding-top: 20px; padding-bottom: 20px;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-5 text-center">
+                <div class="intro-excerpt">
+                    <h1>Sign Up</h1>
+                    <p class="mb-4">Join our online bookshop! Sign up to explore a world of books tailored just for you. Enjoy personalized recommendations, exclusive deals, and a hassle-free shopping experience. Let's make reading simple and fun – sign up now!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Hero Section -->
+
+<!-- Start Signup Form -->
+<div style="padding-top: 20px; padding-bottom: 20px;">
+    <form method="post" style="margin: 0 auto; width: 30%;">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-12"></div>
+            <div class="form-group">
+                {{ form | crispy }}
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary-hover-outline">Sign Up</button>
+    </form>
+</div>
+{{ form.errors }}              
+<!-- End Signup Form -->
+
+
+{% endblock %}
+

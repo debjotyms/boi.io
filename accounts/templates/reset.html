@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Password Reset
+{% endblock %}
+
+{% block content %}
+<!-- Start Hero Section -->
+<div class="hero d-flex align-items-center" style="padding-top: 20px; padding-bottom: 20px;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-5 text-center">
+                <div class="intro-excerpt">
+                    <h1>Password Reset</h1>
+                    <p class="mb-4">Forgot your password? No worries! Enter your email address below and we'll send you a link to reset your password.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Hero Section -->
+
+<!-- Start Password Reset Form -->
+<div class="untree_co-section">
+    <div class="container">
+        <div class="block">
+            <div class="row justify-content-center">
+                <div class="col-md-8 col-lg-8 pb-4">
+                    <form>
+                        <div class="form-group">
+                            <label class="text-black" for="email">Email address</label>
+                            <input type="email" class="form-control" id="email" placeholder="Enter your email address">
+                        </div>
+                        <div class="form-group py-2">
+                        </div>
+
+                        <a href="{% url 'sent' %}">
+                            <button type="button" class="btn btn-primary-hover-outline">Reset Password</button>
+                        </a>
+
+                        <a href="{% url 'base' %}">
+                            <button type="button" class="btn btn-primary-hover-outline">Cancel</button>
+                        </a>
+                        
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Password Reset Form -->
+
+
+{% endblock %}

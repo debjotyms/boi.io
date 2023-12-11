@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block content %}
+<!-- Start Hero Section -->
+<div class="hero d-flex align-items-center" style="padding-top: 20px; padding-bottom: 20px;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-5 text-center">
+                <div class="intro-excerpt">
+                    <h1>Posts</h1>
+                    <p class="mb-4">Discover others though about Book reading!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Hero Section -->
+
+<style>
+    .card {
+        transition: transform 0.3s ease;
+        cursor: pointer;
+        border-radius: 10px;
+        position: relative; /* Add this line to enable stacking of elements */
+        color: white;
+        background: linear-gradient(45deg, #141e30 , #243b55);
+    }
+
+    .card:hover {
+        transform: scale(1.03);
+        color: white;
+        transition: transform .5s ease;
+        background-color: rgb(255, 255, 255);
+        overflow: hidden; /* Add this line to hide the overflow */
+    }
+
+    .card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(45deg, #243b55, #141e30 );
+        z-index: -1; /* Add this line to position the gradient behind the content */
+        opacity: 0; /* Add this line to hide the gradient initially */
+        transition: opacity 0.3s ease; /* Add this line to animate the opacity */
+    }
+
+    .card:hover::before {
+        opacity: 1; /* Add this line to show the gradient on hover */
+    }
+    
+    .card-title {
+        font-size: 1.25rem;
+        font-weight: bold;
+    }
+    </style>
+    
+    <!-- Start Card Section -->
+    <div class="card-section d-flex align-items-center justify-content-center" style="width: 100%; padding: 30px 30px 30px 30px">
+        <div class="card" style="width: 400px; height: 400px;">
+            <div class="card-body">
+                <h2 class="card-title">{{request.user}}</h2> <!-- Name at the top left corner -->
+                <p>This is the content of the post.</p> <!-- Post content -->
+            </div>
+        </div>
+    </div>
+    <!-- End Card Section -->
+
+
+
+{% endblock %}

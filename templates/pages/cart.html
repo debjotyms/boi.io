@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+	Cart
+{% endblock %}
+
+{% block content %}
+
+<!-- Start Hero Section -->
+<div class="hero d-flex align-items-center" style="padding-top: 20px; padding-bottom: 20px;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-5 text-center">
+                <div class="intro-excerpt">
+                    <h1>Shopping Cart</h1>
+					<p class="mb-4">Review the items in your cart and proceed to checkout.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Hero Section -->
+
+<!-- Start Cart Section -->
+<div class="untree_co-section before-footer-section">
+	<div class="container">
+	  <div class="row mb-5">
+		<form class="col-md-12" method="post">
+		  <div class="site-blocks-table">
+			<table class="table">
+				<thead>
+					<tr>
+					  <th class="product-name">Book</th>
+					  <th class="product-price">Price</th>
+					  <th class="product-quantity">Quantity</th>
+					  <th class="product-total">Total</th>
+					  <th class="product-remove">Remove</th>
+					</tr>
+				  </thead>
+				  <tbody>
+					{% for item in cart %}
+					{% with book=item.product %}
+					<tr>
+					  <td class="product-name">
+						<h2 class="h5 text-black">{{book.title}}</h2>
+					  </td>
+					  <td>{{book.price}}</td>
+					  <td>
+						<div class="input-group mb-3 d-flex align-items-center quantity-container" style="max-width: 120px;">
+						  <div class="input-group-prepend">
+							<a href="?product_id={{book.id}}&&quantity=-1">
+								<button class="btn btn-outline-black" type="button">&minus;</button>
+							</a>
+						  </div>
+						  <input type="text" class="form-control text-center quantity-amount" value="{{book.quantity}}" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+						  
+						  <div class="input-group-append">
+							<a href="?product_id={{book.id}}&&quantity=1">
+								<button class="btn btn-outline-black" type="button">&plus;</button>
+							</a>
+						  </div>
+						</div>
+					  </td>
+					  <td>{{item.subtotal}}</td>
+					  <td><a href="?product_id={{book.id}}&&quantity=-{{book.quantity}}" class="btn btn-black btn-sm">X</a></td>
+					</tr>
+					{% endwith %}
+					{% endfor %}
+			  </tbody>
+			</table>
+		  </div>
+		</form>
+	  </div>
+	  <div class="row">
+		<div class="col-md-6">
+		  <div class="row mb-5">
+			<div class="col-md-6 mb-3 mb-md-0">
+			  <a href="?clear=true">
+				<button class="btn btn-black btn-sm btn-block">Clear Cart</button>
+			  </a>
+			</div>
+		  </div>
+		  <div class="row">
+		  </div>
+		</div>
+		<div class="col-md-6 pl-5">
+		  <div class="row justify-content-end">
+			<div class="col-md-7">
+			  <div class="row">
+				<div class="col-md-12">
+					<p><a href="{% url 'thanks'%}" class="btn btn-sm btn-outline-black">Place Order</a></p>
+				</div>
+			  </div>
+			</div>
+		  </div>
+		</div>
+	  </div>
+	</div>
+  </div>
+<!-- End Cart Section -->
+
+{% endblock %}

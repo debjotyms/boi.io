@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block content %}
+<!-- Start Hero Section -->
+<div class="hero d-flex align-items-center" style="padding-top: 20px; padding-bottom: 20px;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-5 text-center">
+                <div class="intro-excerpt">
+                    <h1>Welcome to our Bookshop!</h1>
+                    <p class="mb-4">Discover a world of books at your fingertips. Browse our extensive collection, find your next favorite read, and embark on new literary adventures. Whether you're a bookworm or a casual reader, we have something for everyone. Start exploring now!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Hero Section -->
+
+
+<style>
+    .card {
+        transition: transform 0.3s ease;
+        cursor: pointer;
+        border-radius: 10px;
+        position: relative; /* Add this line to enable stacking of elements */
+        color: white;
+        background: linear-gradient(45deg , #243b55, #141e30);
+    }
+
+    .card:hover {
+        transform: scale(1.03);
+        color: white;
+        transition: transform .5s ease;
+        background-color: rgb(255, 255, 255);
+        overflow: hidden; /* Add this line to hide the overflow */
+    }
+
+    .card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(45deg, #141e30 , #243b55);
+        z-index: -1; /* Add this line to position the gradient behind the content */
+        opacity: 0; /* Add this line to hide the gradient initially */
+        transition: opacity 0.3s ease; /* Add this line to animate the opacity */
+    }
+
+    .card:hover::before {
+        opacity: 1; /* Add this line to show the gradient on hover */
+    }
+</style>
+
+<script>
+    const cards = document.querySelectorAll('.card');
+    const hoverSound = document.getElementById('hover-sound');
+
+    cards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            hoverSound.play();
+        });
+    });
+</script>
+
+<div class="container py-5">
+    <div style="padding-top: 20px; padding-bottom: 20px; width: 20%;">
+        {% if request.path == '/books/' %}
+            <!-- Search Bar -->
+            <form class="d-flex">
+                <input class="form-control me-2 medium-input" name="q" type="search" placeholder="Search" aria-label="Search">
+            </form>
+            <!-- End Search Bar -->
+        {% endif %}
+    </div>
+    <div class="row">
+        {% for book in books %}
+            <div class="col-lg-4 mb-4">
+                <a href="{% url 'product' book.id %}" style="text-decoration: none;">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title mb-0">{{ book.title }}</h5>
+                            <div class="card-text text-secondary mt-2 mb-4">
+                                <small>Author: {{ book.author }}</small><br>
+                                <small>Price: ${{ book.price }}</small><br>
+                                <small>Stock: {{ book.stock }}</small><br>
+                                <small>Genre: {{ book.genre }}</small><br>
+                                <small>ISBN: {{ book.isbn }}</small>
+                            </div>
+                            <p class="card-text mt-auto">{{ book.description }}</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+{% endblock %}

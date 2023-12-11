@@ -1,0 +1,36 @@
+{% load static %}
+<!-- Start Header/Navigation -->
+<nav class="custom-navbar navbar navbar navbar-expand-md navbar-dark bg-dark fixed-top" arial-label="Furni navigation bar">
+    
+    <div class="container">
+        <a class="navbar-brand" href="{% url 'home'%}">boi<span>.</span>io</a>
+        
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsFurni" aria-controls="navbarsFurni" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        
+        <div class="collapse navbar-collapse justify-content-center" id="navbarsFurni">
+            <ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
+                <li><a class="nav-link" href="{% url 'home'%}">Home</a></li>
+                <li><a class="nav-link" href="{% url 'books'%}">Books</a></li>
+                <li><a class="nav-link" href="{% url 'posts'%}">Posts</a></li>
+                <li><a class="nav-link" href="{% url 'addbook'%}">Add Book</a></li>
+                <span>{{cart|length}}</span>
+                <li><a class="nav-link" href="{% url 'cart'%}"><img src="{% static 'images/cart.svg' %}"></a></li>
+            </ul>
+
+            <ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
+                {% if request.user.is_authenticated %}
+                <li><a class="nav-link" href="contact.html">{{request.user}}</a></li>
+                <li><a class="nav-link" href="{% url 'logout'%}">Logout</a></li>
+                {% else %}
+                <li><a class="nav-link" href="{% url 'login'%}">Login</a></li>
+                <li><a class="nav-link" href="{% url 'signup'%}">Sign Up</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+        
+</nav>
+<!-- End Header/Navigation -->
